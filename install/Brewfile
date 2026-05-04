@@ -1,0 +1,21 @@
+# neovim and required packages
+brew "neovim"
+brew "lazygit"
+brew "ripgrep"
+brew "tree-sitter"
+brew "tree-sitter-cli"
+brew "fzf"
+brew "fd"
+brew "luarocks"
+
+# misc
+brew "gh"
+brew "mise"
+brew "tldr"
+brew "tmux"
+brew "dockutil"
+brew "shellcheck"
+
+# ohmyzsh
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"

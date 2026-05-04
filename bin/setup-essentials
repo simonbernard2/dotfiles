@@ -1,0 +1,39 @@
+#!/bin/sh
+set -eu
+
+if command -v brew >/dev/null 2>&1; then
+  eval "$(brew shellenv)"
+elif [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Homebrew is required. Run: bin/setup brew" >&2
+  exit 1
+fi
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Installing Oh My Zsh..."
+  RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "Oh My Zsh already installed."
+fi
+
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  echo "Installing tmux plugin manager..."
+  mkdir -p "$HOME/.tmux/plugins"
+  git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+else
+  echo "tmux plugin manager already installed."
+fi
+
+if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
+  echo "Installing nvm..."
+  PROFILE=/dev/null sh -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh)"
+else
+  echo "nvm already installed."
+fi
+
+echo "Essentials are ready. Open a new shell after running bin/setup links."

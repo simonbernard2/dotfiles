@@ -1,0 +1,64 @@
+#!/bin/sh
+set -eu
+
+ROOT_DIR="$(cd -- "$(dirname -- "$0")/.." && pwd)"
+
+usage() {
+  cat <<EOF
+Usage: bin/setup <command>
+
+Commands:
+  brew        Install Homebrew if needed, then install formulae and casks
+  essentials  Install dependencies implied by these dotfiles
+  links       Link dotfiles into the home directory, backing up conflicts
+  macos       Apply macOS defaults
+  dock        Configure the Dock
+  apps        Print app import steps for Raycast and iTerm
+  all         Run brew, essentials, links, macos, dock, and apps
+EOF
+}
+
+run_command() {
+  case "$1" in
+    brew)
+      "$ROOT_DIR/bin/setup-brew"
+      ;;
+    essentials)
+      "$ROOT_DIR/bin/setup-essentials"
+      ;;
+    links)
+      "$ROOT_DIR/bin/setup-links"
+      ;;
+    macos)
+      "$ROOT_DIR/macOS/defaults.sh"
+      ;;
+    dock)
+      "$ROOT_DIR/macOS/dock.sh"
+      ;;
+    apps)
+      "$ROOT_DIR/bin/setup-apps"
+      ;;
+    all)
+      run_command brew
+      run_command essentials
+      run_command links
+      run_command macos
+      run_command dock
+      run_command apps
+      ;;
+    -h|--help|help)
+      usage
+      ;;
+    *)
+      usage >&2
+      exit 1
+      ;;
+  esac
+}
+
+if [ "$#" -ne 1 ]; then
+  usage >&2
+  exit 1
+fi
+
+run_command "$1"

@@ -1,0 +1,47 @@
+#!/bin/sh
+set -eu
+
+ROOT_DIR="$(cd -- "$(dirname -- "$0")/.." && pwd)"
+TARGET_HOME="${DOTFILES_HOME:-$HOME}"
+BACKUP_DIR="$TARGET_HOME/.dotfiles-backups/$(date +%Y%m%d-%H%M%S)"
+
+ensure_parent() {
+  mkdir -p "$(dirname -- "$1")"
+}
+
+is_same_link() {
+  [ -L "$1" ] && [ "$(readlink "$1")" = "$2" ]
+}
+
+backup_path_for() {
+  printf '%s/%s\n' "$BACKUP_DIR" "${1#"$TARGET_HOME"/}"
+}
+
+link_item() {
+  src="$1"
+  dest="$2"
+
+  ensure_parent "$dest"
+
+  if is_same_link "$dest" "$src"; then
+    echo "Already linked: $dest"
+    return
+  fi
+
+  if [ -e "$dest" ] || [ -L "$dest" ]; then
+    backup_dest="$(backup_path_for "$dest")"
+    ensure_parent "$backup_dest"
+    mv "$dest" "$backup_dest"
+    echo "Backed up: $dest -> $backup_dest"
+  fi
+
+  ln -s "$src" "$dest"
+  echo "Linked: $dest -> $src"
+}
+
+link_item "$ROOT_DIR/config/zsh/.zshrc" "$TARGET_HOME/.zshrc"
+link_item "$ROOT_DIR/config/zsh/.zprofile" "$TARGET_HOME/.zprofile"
+link_item "$ROOT_DIR/config/tmux/tmux.conf" "$TARGET_HOME/.tmux.conf"
+link_item "$ROOT_DIR/config/nvim" "$TARGET_HOME/.config/nvim"
+link_item "$ROOT_DIR/config/git/config" "$TARGET_HOME/.gitconfig"
+link_item "$ROOT_DIR/config/git/ignore" "$TARGET_HOME/.config/git/ignore"

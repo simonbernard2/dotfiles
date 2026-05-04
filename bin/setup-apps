@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+ROOT_DIR="$(cd -- "$(dirname -- "$0")/.." && pwd)"
+
+cat <<EOF
+Manual app import steps:
+
+Raycast:
+  1. Open Raycast.
+  2. Open Settings > Advanced.
+  3. Import: $ROOT_DIR/config/raycast/raycast_config.rayconfig
+
+iTerm:
+  1. Open iTerm2.
+  2. Open Settings > Profiles.
+  3. Import: $ROOT_DIR/config/iterm/itermProfile.json
+EOF
