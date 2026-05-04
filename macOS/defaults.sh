@@ -12,6 +12,9 @@ disable_symbolic_hotkey() {
       "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>$key_code</integer><integer>$modifiers</integer></array><key>type</key><string>standard</string></dict></dict>"
 }
 
+# Close System Settings before writing preferences
+osascript -e 'tell application "System Settings" to quit' >/dev/null 2>&1 || true
+
 ###############################################################################
 # Keyboard                                                                      #
 ###############################################################################

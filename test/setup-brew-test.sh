@@ -6,6 +6,7 @@ EXPECTED_CASKS="docker
 font-meslo-lg-nerd-font
 google-chrome
 iterm2
+karabiner-elements
 logseq
 raycast
 slack

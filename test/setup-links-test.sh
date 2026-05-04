@@ -61,6 +61,7 @@ assert_link "$ROOT_DIR/config/tmux/tmux.conf" "$TEST_HOME/.tmux.conf"
 assert_link "$ROOT_DIR/config/nvim" "$TEST_HOME/.config/nvim"
 assert_link "$ROOT_DIR/config/git/config" "$TEST_HOME/.gitconfig"
 assert_link "$ROOT_DIR/config/git/ignore" "$TEST_HOME/.config/git/ignore"
+assert_link "$ROOT_DIR/config/karabiner/karabiner.json" "$TEST_HOME/.config/karabiner/karabiner.json"
 
 # Idempotency check: running setup-links again over the same links should
 # succeed without backing up or replacing already-correct symlinks.
