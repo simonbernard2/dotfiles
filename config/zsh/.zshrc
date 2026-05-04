@@ -20,7 +20,7 @@ alias vi="nvim"
 alias tmuxconfig="vi ~/.tmux.conf"
 alias vimconfig="vi ~/.config/nvim"
 alias zshconfig="vi ~/.zshrc"
-alias lg="lazygit"
+alias gg="lazygit"
 
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
