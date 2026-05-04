@@ -56,3 +56,11 @@ Raycast and iTerm need manual imports after the apps are installed:
 
 - Raycast: import `config/raycast/raycast_config.rayconfig` from Raycast Settings > Advanced.
 - iTerm2: import `config/iterm/itermProfile.json` from iTerm2 Settings > Profiles.
+
+## Tests
+
+Run the shell checks and fixture tests:
+
+```bash
+bin/test
+```

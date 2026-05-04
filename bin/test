@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+ROOT_DIR="$(cd -- "$(dirname -- "$0")/.." && pwd)"
+
+if command -v shellcheck >/dev/null 2>&1; then
+  shellcheck "$ROOT_DIR"/bin/setup "$ROOT_DIR"/bin/setup-* "$ROOT_DIR"/macOS/*.sh "$ROOT_DIR"/test/*.sh
+else
+  echo "shellcheck not found; skipping shellcheck."
+fi
+
+sh -n "$ROOT_DIR"/bin/setup "$ROOT_DIR"/bin/setup-* "$ROOT_DIR"/macOS/*.sh "$ROOT_DIR"/test/*.sh
+
+"$ROOT_DIR/test/setup-links-test.sh"
+"$ROOT_DIR/test/setup-brew-test.sh"
