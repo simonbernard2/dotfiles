@@ -1,4 +1,5 @@
 # neovim and required packages
+brew "python"
 brew "neovim"
 brew "lazygit"
 brew "ripgrep"
@@ -9,12 +10,15 @@ brew "fd"
 brew "luarocks"
 
 # misc
+brew "bat"
 brew "gh"
 brew "mise"
 brew "tldr"
 brew "tmux"
 brew "dockutil"
 brew "shellcheck"
+brew "trash"
+brew "zoxide"
 
 # ohmyzsh
 brew "zsh-autosuggestions"

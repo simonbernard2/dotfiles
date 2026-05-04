@@ -27,10 +27,11 @@ source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 
 export PATH="$PATH:$HOME/.local/bin"
 
+eval "$(mise activate zsh)"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-eval "$(mise activate zsh)"
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 if [ -d "$HOME/.docker/completions" ]; then
@@ -39,3 +40,5 @@ fi
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+eval "$(zoxide init zsh)"
