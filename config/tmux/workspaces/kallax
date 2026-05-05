@@ -1,0 +1,33 @@
+#!/bin/zsh
+
+set -e
+
+SESSION_NAME="kallax"
+PROJECT_ROOT="$HOME/GitHub/KallaxLED/frontend"
+SERVER_COMMAND="bin/server"
+
+for arg in "$@"; do
+  case "$arg" in
+    -h|--host)
+      SERVER_COMMAND="bin/server --host"
+      ;;
+    *)
+      echo "Unknown argument: $arg" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+  tmux attach-session -t "$SESSION_NAME"
+  exit 0
+fi
+
+tmux new-session -d -s "$SESSION_NAME" -n code -c "$PROJECT_ROOT"
+tmux send-keys -t "${SESSION_NAME}:code" "vi" C-m
+
+tmux new-window -t "$SESSION_NAME" -n server -c "$PROJECT_ROOT"
+tmux send-keys -t "${SESSION_NAME}:server" "$SERVER_COMMAND" C-m
+
+tmux select-window -t "${SESSION_NAME}:code"
+tmux attach-session -t "$SESSION_NAME"

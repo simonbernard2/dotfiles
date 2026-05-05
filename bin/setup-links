@@ -39,10 +39,21 @@ link_item() {
   echo "Linked: $dest -> $src"
 }
 
+# zsh configs
 link_item "$ROOT_DIR/config/zsh/.zshrc" "$TARGET_HOME/.zshrc"
 link_item "$ROOT_DIR/config/zsh/.zprofile" "$TARGET_HOME/.zprofile"
+
+# tmux config and workspaces
 link_item "$ROOT_DIR/config/tmux/tmux.conf" "$TARGET_HOME/.tmux.conf"
-link_item "$ROOT_DIR/config/nvim" "$TARGET_HOME/.config/nvim"
+for workspace_script in "$ROOT_DIR"/config/tmux/workspaces/*; do
+  [ -f "$workspace_script" ] || continue
+  link_item "$workspace_script" "$TARGET_HOME/.local/bin/$(basename -- "$workspace_script")"
+done
+
+# git global configs
 link_item "$ROOT_DIR/config/git/config" "$TARGET_HOME/.gitconfig"
 link_item "$ROOT_DIR/config/git/ignore" "$TARGET_HOME/.config/git/ignore"
+
+# neovim and karabiner elements configs
+link_item "$ROOT_DIR/config/nvim" "$TARGET_HOME/.config/nvim"
 link_item "$ROOT_DIR/config/karabiner/karabiner.json" "$TARGET_HOME/.config/karabiner/karabiner.json"

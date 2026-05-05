@@ -12,7 +12,8 @@ raycast
 slack
 spotify
 visual-studio-code
-vlc"
+vlc
+zoom"
 
 expected_casks_sorted="$(printf '%s\n' "$EXPECTED_CASKS" | sort)"
 actual_casks_sorted="$(sed -n 's/^cask "\([^"]*\)".*/\1/p' "$ROOT_DIR/install/Caskfile" | sort)"

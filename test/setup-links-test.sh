@@ -58,6 +58,7 @@ DOTFILES_HOME="$TEST_HOME" "$ROOT_DIR/bin/setup-links" >/dev/null
 assert_link "$ROOT_DIR/config/zsh/.zshrc" "$TEST_HOME/.zshrc"
 assert_link "$ROOT_DIR/config/zsh/.zprofile" "$TEST_HOME/.zprofile"
 assert_link "$ROOT_DIR/config/tmux/tmux.conf" "$TEST_HOME/.tmux.conf"
+assert_link "$ROOT_DIR/config/tmux/workspaces/kallax" "$TEST_HOME/.local/bin/kallax"
 assert_link "$ROOT_DIR/config/nvim" "$TEST_HOME/.config/nvim"
 assert_link "$ROOT_DIR/config/git/config" "$TEST_HOME/.gitconfig"
 assert_link "$ROOT_DIR/config/git/ignore" "$TEST_HOME/.config/git/ignore"
@@ -75,9 +76,9 @@ CONFLICT_HOME="$(mktemp -d /private/tmp/dotfiles-links-conflict-test.XXXXXX)"
 trap 'rm -rf "$TEST_HOME" "$CONFLICT_HOME"' EXIT INT TERM
 
 mkdir -p "$CONFLICT_HOME/.config/git"
-printf 'existing zshrc\n' > "$CONFLICT_HOME/.zshrc"
-printf 'existing gitconfig\n' > "$CONFLICT_HOME/.gitconfig"
-printf 'existing gitignore\n' > "$CONFLICT_HOME/.config/git/ignore"
+printf 'existing zshrc\n' >"$CONFLICT_HOME/.zshrc"
+printf 'existing gitconfig\n' >"$CONFLICT_HOME/.gitconfig"
+printf 'existing gitignore\n' >"$CONFLICT_HOME/.config/git/ignore"
 
 DOTFILES_HOME="$CONFLICT_HOME" "$ROOT_DIR/bin/setup-links" >/dev/null
 
