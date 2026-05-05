@@ -26,6 +26,8 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write com.apple.BezelServices kDim -bool true
 # Turn off keyboard illumination when computer is not used for 5 minutes
 defaults write com.apple.BezelServices kDimTime -int 300
+# Disable accent popups when holding letter keys
+defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Disable Spotlight and Finder search keyboard shortcuts
 disable_symbolic_hotkey 64 49 1048576
