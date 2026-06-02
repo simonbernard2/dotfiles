@@ -8,6 +8,7 @@ google-chrome
 iterm2
 karabiner-elements
 logseq
+postman
 raycast
 slack
 spotify
