@@ -42,3 +42,4 @@ compinit
 # End of Docker CLI completions
 
 eval "$(zoxide init zsh)"
+export EDITOR="nvim"
